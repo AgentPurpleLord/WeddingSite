@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mollie & Nathan - RSVP</title>
+    <script src="scripts/formSubmit.js"></script>
+    <script src="scripts/generateGuestInputs.js"></script>
+    <link href="css/form.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="rsvpForm">
+    <form id="rsvpForm" onsubmit="rsvpSubmit()" method="POST" action="https://script.google.com/macros/s/AKfycbyPTmYD-yUifdSZYvwXvMeD9mDB07Tw3Sw-RV9DAKXN/dev">
+
+        <!-- Round top area with our names inside it -->
+
+        <div class="shadow-wrap bg-card">
+            <div class="round-top">
+                <h1 class="txt-color">Mollie & Nathan</h1>
+            </div>
+            <!-- Attendance Checkboxes Section (coming or not -->
+            <div class="c-align" id="attendanceOptions">
+                <hr>
+                <div class="radioButtonDiv">
+                    <input class="attendingRadio" id="attending" name="attendance" type="radio" value="Yes">
+                    <label class="attendingLabel txt-color" for="attending">I'll be there</label>
+                </div>
+                <div class="radioButtonDiv">
+                    <input class="notAttendingRadio" id="notAttending" name="attendance" type="radio" value="No">
+                    <label class="notAttendingLabel txt-color" for="notAttending">I can't make it sorry</label>
+                </div>
+                <hr>
+            </div>
+
+            <!-- Guest label, dropdown, input for amount & the cards generated for each guests input -->
+            <div id="additionalGuests" class="bg-card">
+                <div class="guestSelect">
+                    <label for="guestCount"></label>
+                    <select id="guestCount" class="txt-color" name="guestCount" onchange="generateGuestInputs()" required>
+                        <option value="">Number of Guests</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+                <div id="guestInputsContainer"></div>
+            </div>
+
+            <!-- Email & phone number of the main person responding (a point of contact) -->
+            <div id="contactInfo" class="bg-card">
+                <div>
+                    <label for="phoneNum"></label><input class="phoneNum" id="phoneNum" name="phoneNum" placeholder="Phone number"
+                                                         type="text">
+                </div>
+                <div>
+                    <label for="email"></label><input class="email" id="email" name="email" placeholder="Email"
+                                                      type="email">
+                </div>
+            </div>
+
+            <!-- The submit Button -->
+            <div class="buttonContainer">
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+

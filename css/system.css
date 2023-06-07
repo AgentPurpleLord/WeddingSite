@@ -1,0 +1,97 @@
+@import url('https://fonts.cdnfonts.com/css/libre-baskerville');
+
+:root {
+    --red-white: hsl(0, 61%, 74%);
+    --red-lighter: hsl(0, 37%, 52%);
+    --red-light: hsl(0, 45%, 64%);
+    --red-mid: hsl(0, 50%, 52%);
+    --red-dark: hsl(0, 55%, 42%);
+    --red-darker: hsl(0, 67%, 32%);
+
+    --blue-lighter: hsl(206, 77%, 81%);
+    --blue-light: hsl(208, 60%, 62%);
+    --blue-mid: hsl(207, 61%, 49%);
+    --blue-dark: hsl(207, 64%, 39%);
+    --blue-darker: hsl(208, 63%, 27%);
+
+    --black: hsl(0, 0%, 8%);
+    --black-light: hsl(0, 0%, 13%);
+    --grey-darker: hsl(0, 0%, 28%);
+    --grey-dark: hsl(0, 0%, 43%);
+    --grey-mid: hsl(0, 0%, 58%);
+    --grey-light: hsl(0, 0%, 76%);
+    --grey-lighter: hsl(0, 0%, 88%);
+    --white-dark: hsl(0, 0%, 95%);
+    --white: hsl(0, 0%, 99%);
+
+    --font-tiny: 12px;
+    --font-smaller: 14px;
+    --font-small: 16px;
+    --font-normal: 18px;
+    --font-big: 20px;
+    --font-bigger: 24px;
+    --font-large: 30px;
+    --font-larger: 36px;
+    --font-huge: 48px;
+    --font-huger: 60px;
+    --font-massive: 72px;
+    --font-massiver: 180px;
+    --font-tight: -0.05em;
+    --font-space: 0;
+    --font-wide: 0.05em;
+
+    --size-01: 4px;
+    --size-02: 8px;
+    --size-03: 12px;
+    --size-04: 16px;
+    --size-05: 24px;
+    --size-06: 32px;
+    --size-07: 48px;
+    --size-08: 64px;
+    --size-09: 96px;
+    --size-10: 128px;
+    --size-11: 192px;
+    --size-12: 384px;
+    --size-13: 512px;
+    --size-14: 640px;
+    --size-15: 768px;
+}
+
+* {
+    font-family: 'Libre Baskerville', sans-serif;
+}
+
+html {
+    font-size: calc(15px + 0.390625vw);
+}
+
+button {
+    align-items: center;
+    background-color: var(--red-mid);
+    border: 2px solid var(--black-mid);
+    border-radius: 50px;
+    color: var(--white-lighter);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    font-size: var(--font-bigger);
+    height: var(--size-08);
+    justify-content: center;
+    line-height: var(--size-05);
+    width: 200px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: 250ms ease-in-out;
+}
+
+button:hover {
+    transition: 250ms ease-in-out;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    background-color: var(--red-light);
+}
