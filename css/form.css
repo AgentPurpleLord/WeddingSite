@@ -232,7 +232,7 @@ input[type=checkbox] {
     margin-right: 14px;
 }
 
-.buttonContainer {
+.button-container {
     display: flex;
     align-items: center;
     justify-content: center;
