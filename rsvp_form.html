@@ -8,8 +8,19 @@
     <link href="css/form.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="rsvpForm">
-    <form id="rsvpForm" onsubmit="rsvpSubmit()" method="POST" action="https://script.google.com/macros/s/AKfycbyPTmYD-yUifdSZYvwXvMeD9mDB07Tw3Sw-RV9DAKXN/dev">
+<script>0</script>
+<nav>
+    <div class="nav-hr">
+        <hr>
+    </div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#schedule">Schedule</a></li>
+        <li><a href="rsvp_form.html">RSVP</a></li>
+    </ul>
+</nav>
+<div class="rsvp-form">
+    <form id= "rsvp-form" onsubmit="rsvpSubmit()" method="POST" action="https://script.google.com/macros/s/AKfycbyPTmYD-yUifdSZYvwXvMeD9mDB07Tw3Sw-RV9DAKXN/dev">
 
         <!-- Round top area with our names inside it -->
 
@@ -18,24 +29,24 @@
                 <h1 class="txt-color">Mollie & Nathan</h1>
             </div>
             <!-- Attendance Checkboxes Section (coming or not -->
-            <div class="c-align" id="attendanceOptions">
+            <div class="c-align" id="attendance-options">
                 <hr>
-                <div class="radioButtonDiv">
-                    <input class="attendingRadio" id="attending" name="attendance" type="radio" value="Yes">
-                    <label class="attendingLabel txt-color" for="attending">I'll be there</label>
+                <div class="radio-button-div">
+                    <input class= "attending-radio" id="attending" name="attendance" type="radio" value="Yes">
+                    <label class= "attending-label" for="attending">I'll be there</label>
                 </div>
-                <div class="radioButtonDiv">
-                    <input class="notAttendingRadio" id="notAttending" name="attendance" type="radio" value="No">
-                    <label class="notAttendingLabel txt-color" for="notAttending">I can't make it sorry</label>
+                <div class="radio-button-div">
+                    <input class= "not-attending-radio" id= "not-attending" name="attendance" type="radio" value="No">
+                    <label class= "not-attending-label" for="not-attending">I can't make it sorry</label>
                 </div>
                 <hr>
             </div>
 
             <!-- Guest label, dropdown, input for amount & the cards generated for each guests input -->
-            <div id="additionalGuests" class="bg-card">
-                <div class="guestSelect">
-                    <label for="guestCount"></label>
-                    <select id="guestCount" class="txt-color" name="guestCount" onchange="generateGuestInputs()" required>
+            <div id="additional-guests" class="bg-card">
+                <div class="guest-select">
+                    <label for="guest-count"></label>
+                    <select id= "guest-count" class="txt-color" name= "guest-count" onchange="generateGuestInputs()" required>
                         <option value="">Number of Guests</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -46,14 +57,14 @@
                         <option value="7">7</option>
                     </select>
                 </div>
-                <div id="guestInputsContainer"></div>
+                <div id= "guest-inputs-container"></div>
             </div>
 
             <!-- Email & phone number of the main person responding (a point of contact) -->
-            <div id="contactInfo" class="bg-card">
+            <div id="contact-info" class="bg-card">
                 <div>
-                    <label for="phoneNum"></label><input class="phoneNum" id="phoneNum" name="phoneNum" placeholder="Phone number"
-                                                         type="text">
+                    <label for="phone-num"></label><input class="phone-num" id= "phone-num" name="phone-num" placeholder="Phone number"
+                                                          type="text">
                 </div>
                 <div>
                     <label for="email"></label><input class="email" id="email" name="email" placeholder="Email"
@@ -62,12 +73,13 @@
             </div>
 
             <!-- The submit Button -->
-            <div class="buttonContainer">
+            <div class= "button-container">
                 <button type="submit">Submit</button>
             </div>
         </div>
     </form>
 </div>
 </body>
+<footer></footer>
 </html>
 

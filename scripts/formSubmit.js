@@ -1,31 +1,31 @@
 function rsvpSubmit() {
-    const form = document.getElementById('rsvpForm');
+    const form = document.getElementById('rsvp-form');
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const guestCountSelect = document.getElementById('guestCount');
+        const guestCountSelect = document.getElementById('guest-count');
         const totalGuestCount = parseInt(guestCountSelect.value);
 
         const formData = new FormData();
 
         for (let i = 1; i <= totalGuestCount; i++) {
-            const guestNameField = document.querySelector(`input[name="guest${i}_name"]`);
+            const guestNameField = document.querySelector(`input[name="guest${i}-name"]`);
             const guestName = guestNameField.value;
 
             const dietaryRequirements = [];
-            const dietaryCheckboxes = document.getElementsByClassName(`dietaryRequirementCheckbox${i}`);
+            const dietaryCheckboxes = document.getElementsByClassName(`dietary-requirements-checkbox${i}`);
 
-            const otherDietInfo = document.querySelector(`textarea[name="otherDiet${i}"]`);
-            formData.append(`otherDiet_${i}`, otherDietInfo.value); // Append the value with the correct name
+            const otherDietInfo = document.querySelector(`textarea[name="other-diet${i}"]`);
+            formData.append(`other-diet${i}`, otherDietInfo.value); // Append the value with the correct name
 
             formData.append('date', new Date().toISOString());
             formData.append('attendance', document.querySelector('input[name="attendance"]:checked').value);
-            formData.append(`guestName_${i}`, guestName);
+            formData.append(`guest-name-${i}`, guestName);
             const checkboxArray = Array.from(dietaryCheckboxes);
             checkboxArray.forEach(checkbox => {
                 if (checkbox.checked) {
-                    const value = checkbox.value.replace(`dietaryRequirements${i}_`, '');
+                    const value = checkbox.value.replace(`dietary-requirements${i}_`, '');
                     dietaryRequirements.push(value);
                 }
             });
@@ -35,7 +35,7 @@ function rsvpSubmit() {
 
         fetch(form.action, {
             method: form.method,
-            body: formData
+            body: formData,
         })
             .then(response => response.json())
             .then(data => {

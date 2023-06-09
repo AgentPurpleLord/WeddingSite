@@ -1,47 +1,5 @@
 @import url("/css/system.css");
 
-nav {
-    display: grid;
-    grid-template: ". hr ul" 1fr / 1.5fr 1fr auto;
-    padding: 1.5rem 1rem;
-    align-items: start;
-}
-
-.nav-hr {
-    grid-area: hr;
-    justify-self: stretch;
-    padding-right: 1rem;
-}
-
-.nav-hr hr {
-    width: 100%;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    grid-area: ul;
-}
-
-nav li {
-    float: left;
-}
-
-nav a {
-    text-decoration: none;
-    text-decoration-color: transparent;
-    color: black;
-    padding: 0.5rem;
-    transition: 250ms;
-}
-
-nav a:hover {
-    text-decoration: underline;
-    transition: 250ms;
-}
-
 body {
     background: var(--white-dark);
 }

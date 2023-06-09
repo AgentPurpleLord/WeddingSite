@@ -2,13 +2,20 @@
 let guestData = []; // Array to store guest data
 
 document.addEventListener('DOMContentLoaded', function () {
-    const guestCountSelect = document.getElementById('guestCount');
+    const guestCountSelect = document.getElementById('guest-count');
     guestCountSelect.addEventListener('change', generateGuestInputs);
+    // Retrieve guest data from localStorage
+    const storedGuestData = localStorage.getItem('guestData');
+    if (storedGuestData) {
+        guestData = JSON.parse(storedGuestData);
+        guestCountSelect.value = guestData.length; // Set the guest count select value
+    }
+    generateGuestInputs(); // Generate guest inputs on page load
 });
 
 function generateGuestInputs() {
-    const guestCountSelect = document.getElementById('guestCount');
-    const guestInputsContainer = document.getElementById('guestInputsContainer');
+    const guestCountSelect = document.getElementById('guest-count');
+    const guestInputsContainer = document.getElementById('guest-inputs-container');
 
     const totalGuestCount = parseInt(guestCountSelect.value);
 
@@ -18,7 +25,7 @@ function generateGuestInputs() {
         if (existingGuest) {
             existingGuest.index = i + 1;
         } else {
-            const guest = { index: i + 1, name: '', dietaryRequirements: [], foodAllergies: '' };
+            const guest = {index: i + 1, name: '', dietaryRequirements: [], foodAllergies: ''};
             guestData.push(guest);
         }
     }
@@ -30,37 +37,40 @@ function generateGuestInputs() {
 
     guestInputsContainer.innerHTML = '';
 
-    for (let i = 0; i < totalGuestCount; i++) {
-        const guest = guestData[i];
+    localStorage.setItem('guestData', JSON.stringify(guestData));
+
+    for (const element of guestData) {
+        const guest = element;
 
         const guestCard = document.createElement('div');
-        guestCard.className = 'guestCard';
+        guestCard.className = 'guest-card';
         guestInputsContainer.appendChild(guestCard);
 
         const guestNum = document.createElement('p');
-        guestNum.className = 'guestNum';
+        guestNum.className = 'guest-num';
         guestNum.textContent = `${guest.index}`;
         guestCard.appendChild(guestNum);
 
         const guestNameDiv = document.createElement('div');
-        guestNameDiv.className = 'guestNameDiv';
+        guestNameDiv.className = 'guest-name-div';
         const guestName = document.createElement('input');
         guestName.type = 'text';
-        guestName.name = `guest${guest.index}_name`;
-        guestName.className = 'guestName';
+        guestName.name = `guest${guest.index}-name`;
+        guestName.className = 'guest-name';
         guestName.required = true;
-        guestName.placeholder = 'Name';
+        guestName.placeholder = 'Your name...';
         guestName.value = guest.name; // Set the input value from guest data
         guestNameDiv.appendChild(guestName);
         guestCard.appendChild(guestNameDiv);
 
         guestName.addEventListener('input', function () {
             guest.name = guestName.value;
+            localStorage.setItem('guestData', JSON.stringify(guestData));
         });
 
         const guestDietary = document.createElement('div');
-        guestDietary.className = 'guestDietary';
-        guestDietary.id = `dietaryRequirements${guest.index}`;
+        guestDietary.className = 'guest-dietary';
+        guestDietary.id = `dietary-requirements${guest.index}`;
 
         const dietaryOptions = [
             { value: 'Vegetarian', label: 'Vegetarian' },
@@ -77,10 +87,10 @@ function generateGuestInputs() {
 
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.name = `dietaryRequirements${guest.index}_${option.value}`;
+            checkbox.name = `dietary-requirements${guest.index}_${option.value}`;
             checkbox.value = option.value;
             checkbox.id = `${option.value}${guest.index}`;
-            checkbox.className = `dietaryRequirementCheckbox${guest.index} dietaryRequirementCheckbox`;
+            checkbox.className = `dietary-requirements-checkbox${guest.index} dietary-requirements-checkbox`;
             checkbox.onchange = handleDietaryRequirements.bind(null, guest.index);
 
             const checkboxLabel = document.createElement('label');
@@ -96,16 +106,17 @@ function generateGuestInputs() {
         });
 
         const foodAllergiesTextarea = document.createElement('textarea');
-        foodAllergiesTextarea.id = `foodAllergies${guest.index}`;
-        foodAllergiesTextarea.className = 'foodAllergies';
+        foodAllergiesTextarea.id = `food-allergies${guest.index}`;
+        foodAllergiesTextarea.className = 'food-allergies';
         foodAllergiesTextarea.placeholder = 'Let us know about anything else.';
         foodAllergiesTextarea.style.display = guest.dietaryRequirements.includes('Other') ? 'block' : 'none';
         foodAllergiesTextarea.required = guest.dietaryRequirements.includes('Other');
         foodAllergiesTextarea.value = guest.foodAllergies; // Set the textarea value from guest data
-        foodAllergiesTextarea.name = `otherDiet${guest.index}`;
+        foodAllergiesTextarea.name = `other-diet${guest.index}`;
 
         foodAllergiesTextarea.addEventListener('input', function () {
             guest.foodAllergies = foodAllergiesTextarea.value;
+            localStorage.setItem('guestData', JSON.stringify(guestData));
         });
 
         guestDietary.appendChild(foodAllergiesTextarea);
@@ -114,14 +125,14 @@ function generateGuestInputs() {
 }
 
 function handleDietaryRequirements(guestIndex) {
-    const dietaryRequirementCheckboxes = document.getElementsByClassName(`dietaryRequirementCheckbox${guestIndex}`);
+    const dietaryRequirementCheckboxes = document.getElementsByClassName(`dietary-requirements-checkbox${guestIndex}`);
     const guest = guestData[guestIndex - 1];
 
     guest.dietaryRequirements = []; // Reset dietaryRequirements before updating
 
-    for (let i = 0; i < dietaryRequirementCheckboxes.length; i++) {
-        const checkbox = dietaryRequirementCheckboxes[i];
-        const foodAllergiesTextarea = document.getElementById(`foodAllergies${guestIndex}`);
+    for (const element of dietaryRequirementCheckboxes) {
+        const checkbox = element;
+        const foodAllergiesTextarea = document.getElementById(`food-allergies${guestIndex}`);
 
         if (checkbox.checked) {
             guest.dietaryRequirements.push(checkbox.value);
@@ -138,14 +149,15 @@ function handleDietaryRequirements(guestIndex) {
     if (guest.dietaryRequirements.includes('Other')) {
         const otherGuestIndexes = getGuestIndexesByValue('Other');
         if (otherGuestIndexes.length > 1) {
-            const firstTextarea = document.getElementById(`foodAllergies${otherGuestIndexes[0]}`);
+            const firstTextarea = document.getElementById(`food-allergies${otherGuestIndexes[0]}`);
             const firstTextareaHeight = firstTextarea.scrollHeight;
             for (let i = 1; i < otherGuestIndexes.length; i++) {
-                const textarea = document.getElementById(`foodAllergies${otherGuestIndexes[i]}`);
+                const textarea = document.getElementById(`food-allergies${otherGuestIndexes[i]}`);
                 textarea.style.height = firstTextareaHeight + 'px';
             }
         }
     }
+    localStorage.setItem('guestData', JSON.stringify(guestData));
 }
 
 function getGuestIndexesByValue(value) {

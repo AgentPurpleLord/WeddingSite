@@ -1,29 +1,27 @@
-@import url('https://fonts.cdnfonts.com/css/libre-baskerville');
+@import url("https://fonts.cdnfonts.com/css/libre-baskerville");
+@import url("https://fonts.cdnfonts.com/css/rouge-script");
 
 :root {
-    --red-white: hsl(0, 61%, 74%);
-    --red-lighter: hsl(0, 37%, 52%);
-    --red-light: hsl(0, 45%, 64%);
-    --red-mid: hsl(0, 50%, 52%);
-    --red-dark: hsl(0, 55%, 42%);
-    --red-darker: hsl(0, 67%, 32%);
-
-    --blue-lighter: hsl(206, 77%, 81%);
-    --blue-light: hsl(208, 60%, 62%);
-    --blue-mid: hsl(207, 61%, 49%);
-    --blue-dark: hsl(207, 64%, 39%);
-    --blue-darker: hsl(208, 63%, 27%);
-
-    --black: hsl(0, 0%, 8%);
-    --black-light: hsl(0, 0%, 13%);
-    --grey-darker: hsl(0, 0%, 28%);
-    --grey-dark: hsl(0, 0%, 43%);
-    --grey-mid: hsl(0, 0%, 58%);
-    --grey-light: hsl(0, 0%, 76%);
-    --grey-lighter: hsl(0, 0%, 88%);
-    --white-dark: hsl(0, 0%, 95%);
-    --white: hsl(0, 0%, 99%);
-
+    --red-white: hsl(0deg 61% 74%);
+    --red-lighter: hsl(0deg 37% 52%);
+    --red-light: hsl(0deg 45% 64%);
+    --red-mid: hsl(0deg 50% 52%);
+    --red-dark: hsl(0deg 55% 42%);
+    --red-darker: hsl(0deg 67% 32%);
+    --blue-lighter: hsl(206deg 77% 81%);
+    --blue-light: hsl(208deg 60% 62%);
+    --blue-mid: hsl(207deg 61% 49%);
+    --blue-dark: hsl(207deg 64% 39%);
+    --blue-darker: hsl(208deg 63% 27%);
+    --black: hsl(0deg 0% 8%);
+    --black-light: hsl(0deg 0% 13%);
+    --grey-darker: hsl(0deg 0% 28%);
+    --grey-dark: hsl(0deg 0% 43%);
+    --grey-mid: hsl(0deg 0% 58%);
+    --grey-light: hsl(0deg 0% 76%);
+    --grey-lighter: hsl(0deg 0% 88%);
+    --white-dark: hsl(0deg 0% 95%);
+    --white: hsl(0deg 0% 99%);
     --font-tiny: 12px;
     --font-smaller: 14px;
     --font-small: 16px;
@@ -39,7 +37,6 @@
     --font-tight: -0.05em;
     --font-space: 0;
     --font-wide: 0.05em;
-
     --size-01: 4px;
     --size-02: 8px;
     --size-03: 12px;
@@ -62,15 +59,13 @@
 }
 
 html {
-    font-size: calc(15px + 0.390625vw);
+    font-size: calc(16px + (32 - 16) * (100vw - 400px) / (1920 - 400));
 }
 
 button {
     align-items: center;
     background-color: var(--red-mid);
-    border: 2px solid var(--black-mid);
     border-radius: 50px;
-    color: var(--white-lighter);
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -85,13 +80,54 @@ button {
     text-align: center;
     text-decoration: none;
     user-select: none;
-    -webkit-user-select: none;
     touch-action: manipulation;
     transition: 250ms ease-in-out;
 }
 
 button:hover {
     transition: 250ms ease-in-out;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 50%);
     background-color: var(--red-light);
+}
+
+nav {
+    display: grid;
+    grid-template: ". hr ul" 1fr / 1.5fr 1fr auto;
+    padding: 1.5rem 1rem;
+    align-items: start;
+}
+
+.nav-hr {
+    grid-area: hr;
+    justify-self: stretch;
+    padding-right: 1rem;
+}
+
+.nav-hr hr {
+    width: 100%;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    grid-area: ul;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    text-decoration: none;
+    text-decoration-color: transparent;
+    color: black;
+    padding: 0.5rem;
+    transition: 250ms;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    transition: 250ms;
 }
