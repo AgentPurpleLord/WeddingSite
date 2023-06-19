@@ -89,7 +89,7 @@ const previousStep = () => {
 // Function to submit the form
 const submitForm = () => {
   if (formData.errorFlag === false) {
-    fetch('https://script.google.com/macros/s/AKfycbxjtyNf98s5RIYeisGqQP5JVFINeVIMOxy1JE8-YqZuYbfRORvGzTiQW5MxYHPKFXyJiQ/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbyLF83P5XTQx262Fxyn7MNrQF58qHRaRWGcQl0mBYDEfxv5fMpwTDAGvRQw-ITe-MdDdA/exec', {
       method: 'POST',
       body: JSON.stringify(formData),
     })
