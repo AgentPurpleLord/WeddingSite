@@ -79,10 +79,3 @@ const validateFormFields = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-  .guest-nav-buttons {
-    display: flex;
-    justify-content: space-around;
-  }
-</style>

@@ -55,9 +55,4 @@ watch(() => props.value, (newValue) => {
   .input-box label {
     font-size: var(--type-sm);
   }
-
-  .error-detected {
-    border: 1px solid red !important;
-    background-color: hsl(10, 100%, 93%);
-  }
 </style>

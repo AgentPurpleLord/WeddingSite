@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, watch} from "vue";
+import { ref, watch } from "vue";
 import { saveFormData } from "@/js/formUtils.js";
 import InputBox from "@/components/FormFields/InputBox.vue";
 import ErrorLabel from "@/components/FormFields/ErrorLabel.vue";
@@ -148,16 +148,19 @@ const isValidEmail = (email) => {
 
 const validateFormFields = () => {
   if (formData.value.name.length < 2) {
-    emits('hasErrors', true);
+    emits("hasErrors", true);
   }
   if (!isValidEmail(formData.value.email)) {
-    emits('hasErrors', true);
+    emits("hasErrors", true);
   }
   if (!isValidPhoneNumber(formData.value.phone)) {
-    emits('hasErrors', true);
-  }
-  else if (formData.value.name.length > 2 && isValidEmail(formData.value.email) && isValidPhoneNumber(formData.value.phone)) {
-    emits('hasErrors', false);
+    emits("hasErrors", true);
+  } else if (
+    formData.value.name.length > 2 &&
+    isValidEmail(formData.value.email) &&
+    isValidPhoneNumber(formData.value.phone)
+  ) {
+    emits("hasErrors", false);
   }
 };
 
@@ -165,10 +168,6 @@ const updateFormData = (field, value) => {
   formData.value[field] = value;
 };
 </script>
-
-
-
-
 
 <style scoped>
 .dietary-options {
@@ -233,9 +232,5 @@ input[type="checkbox"] {
   font-size: var(--type-body);
   -webkit-appearance: none;
   -moz-appearance: textfield;
-}
-.error-detected {
-  border: 1px solid red !important;
-  background-color: hsl(10, 100%, 93%);
 }
 </style>
