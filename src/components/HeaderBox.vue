@@ -1,4 +1,8 @@
 <script setup>
+const navigateRSVP = () => {
+  window.location.href = '#/rsvp_form';
+}
+
 </script>
 
 <template>
@@ -17,7 +21,7 @@
       <img src = "../assets/bottomflowers.png" alt="A group of flowers." />
     </div>
     <div class="button-container">
-      <button class="radius-small rsvp-button">RSVP</button>
+      <button class="radius-small rsvp-button" @click="navigateRSVP" >RSVP</button>
     </div>
   </div>
 </template>
@@ -99,6 +103,7 @@
     width: 100%;
     transform: translate(-13%, -10%);
   }
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -123,6 +128,7 @@
   }
   .header-card {
      margin-top: 20vw;
+    font-size: 0.9em;
    }
 }
 
@@ -136,9 +142,15 @@
     width: 55%;
     transform: translate(-15%, -10%);
   }
+
   .header-card {
     margin-top: 13vw;
+    font-size: 0.8em;
   }
+  .rsvp-button {
+    font-size: 0.5em;
+  }
+
 }
 
 </style>

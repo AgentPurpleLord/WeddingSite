@@ -1,6 +1,5 @@
 <script setup>
-import { ref, reactive, provide, onBeforeMount, watch} from 'vue';
-import { saveFormData, loadFormData } from '@/js/formUtils.js';
+import { ref, reactive, provide } from 'vue';
 import Step1 from "@/components/Form/Step1.vue";
 import Step2 from "@/components/Form/Step2.vue";
 import Step3 from "@/components/Form/Step3.vue";

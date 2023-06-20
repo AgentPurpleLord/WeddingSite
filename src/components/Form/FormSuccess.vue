@@ -8,7 +8,3 @@
     <p>Mollie & Nathan will get in touch if they need anything from you, thanks for filling out the form.</p>
   </div>
 </template>
-
-<style scoped>
-
-</style>

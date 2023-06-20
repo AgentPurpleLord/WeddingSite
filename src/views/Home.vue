@@ -12,5 +12,7 @@ import CustomHR from "@/components/CustomHR.vue";
   <main>
     <CustomHR />
   </main>
-  <Schedule />
+  <div id="schedule">
+    <Schedule />
+  </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import {ref, computed} from 'vue'
+import {ref, computed, provide, onMounted} from 'vue'
 import Home from "@/views/Home.vue";
 import RsvpForm from "@/views/RsvpForm.vue";
 
@@ -8,7 +8,7 @@ const routes = {
   '/rsvp_form': RsvpForm
 }
 
-const currentPath = ref(window.location.hash)
+const currentPath = ref(window.location.hash);
 
 window.addEventListener('hashchange', () => {
   currentPath.value = window.location.hash
@@ -17,6 +17,13 @@ window.addEventListener('hashchange', () => {
 const currentView = computed( () => {
   return routes[currentPath.value.slice(1) || '/']
 });
+
+const scrollSchedule = () => {
+  const scheduleSection = document.getElementById('schedule');
+  scheduleSection.scrollIntoView({ behavior: 'smooth' });
+};
+
+
 </script>
 
 <template>
@@ -26,8 +33,11 @@ const currentView = computed( () => {
         <hr>
       </div>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#/">Home</a></li>
+        <li>
+          <a v-if="currentView === RsvpForm" href="#/">Schedule</a>
+          <a v-else @click.prevent="scrollSchedule" href="#">Schedule</a>
+        </li>
         <li><a href="#/rsvp_form">RSVP</a></li>
       </ul>
     </nav>

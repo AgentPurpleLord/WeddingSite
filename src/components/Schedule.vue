@@ -3,9 +3,15 @@
 
 <template>
   <h2>Schedule</h2>
+  <p class="location">
+    Our wedding is at
+    <a target="_blank" href="https://goo.gl/maps/CuqgdVE32uwxs3jb6"
+      >Warrawong Estate</a
+    >, located at 1200 Exford Road, Eynesbury VIC 3338.
+  </p>
+  <p class="location">There is ample parking on site.</p>
 
   <div class="timeline">
-
     <div class="shadow-small border-coloured radius-medium container c-left">
       <div class="content">
         <h3 class="timeline-heading">2:30pm</h3>
@@ -23,14 +29,24 @@
     <div class="shadow-small border-coloured radius-medium container c-left">
       <div class="content">
         <h3 class="timeline-heading">3:30pm</h3>
-        <p class="timeline-content">Ceremony concludes, reception area available</p>
+        <p class="timeline-content">
+          Ceremony concludes, reception area available
+        </p>
       </div>
     </div>
-
   </div>
 </template>
 
 <style scoped>
+.timeline {
+  font-size: 0.5em;
+}
+
+.location {
+  font-size: 0.5em;
+  text-align: center;
+}
+
 .container {
   margin: var(--sp-s);
   background: var(--background-alt);
@@ -47,6 +63,7 @@ h2 {
   text-align: center;
   font-size: var(--type-h2);
   color: var(--htext);
+  margin: 0;
 }
 h3 {
   font-size: var(--type-h4);
@@ -77,7 +94,7 @@ h3 {
   }
 
   .timeline:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 1pt;
     background-color: var(--Caramel300);
@@ -87,7 +104,7 @@ h3 {
   }
 
   .c-left::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 25px;
     height: 25px;
@@ -100,7 +117,7 @@ h3 {
   }
 
   .c-right::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 25px;
     height: 25px;
@@ -113,23 +130,21 @@ h3 {
     margin-right: 10%;
   }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .timeline {
-    width: 50%;
-  }
-  p {
-    font-size: var(--type-sm);
-  }
-  h2 {
-    text-align: center;
-    font-size: var(--type-h4);
-  }
-  h3 {
-    font-size: var(--type-sm);
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .timeline {
+      width: 50%;
+    }
+    p {
+      font-size: var(--type-sm);
+    }
+    h2 {
+      text-align: center;
+      font-size: var(--type-h4);
+    }
+    h3 {
+      font-size: var(--type-sm);
+    }
   }
 }
-
-}
-
 </style>
