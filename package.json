@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vue/devtools": "^6.5.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "vue": "^3.3.4"
