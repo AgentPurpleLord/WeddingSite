@@ -67,8 +67,8 @@
         <input
           class="border-bw"
           type="number"
-          :value="guestCount"
-          min="0"
+          :value="guestList.length"
+          min="-1"
           :max="7"
         />
         <button class="plus" @click="incrementGuestCount">+</button>
@@ -111,7 +111,7 @@ watch(userDiet, (newDietaryOptions) => {
 });
 
 const decrementGuestCount = () => {
-  if (guestCount.value > 0) {
+  if (guestCount.value >= 0) {
     guestCount.value--;
     guestList.value.pop();
   }

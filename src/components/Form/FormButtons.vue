@@ -27,14 +27,14 @@ const showNextButton = computed(() => {
   if (props.currentStep === 1) {
     return true;
   } else if (props.currentStep === 2) {
-    return props.formData.guestCount !== 0;
+    return props.guests.length !== 0;
   } else if (props.currentStep === 3) {
     return props.currentGuestIndex < props.guests.length - 1;
   }
 });
 
 const showSubmitButton = computed(() => {
-  if (props.currentStep === 2 && props.formData.guestCount === 0) {
+  if (props.currentStep === 2 && props.guests.length === 0) {
     return true;
   } else if (
     props.currentStep === 3 &&
