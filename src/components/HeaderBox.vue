@@ -55,6 +55,7 @@
 
 .header-text h1 {
   font-family: 'Rouge Script', sans-serif;
+  font-weight: normal;
   font-size: var(--type-h1);
   color: var(--htext);
 }
