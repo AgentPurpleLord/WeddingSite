@@ -48,7 +48,8 @@ watch(() => props.value, (newValue) => {
 
   .input-box input {
     font-size: var(--type-body);
-    height: var(--sp-m);
+    font-family: 'Libre Baskerville', sans-serif;
+    font-weight: normal;
     vertical-align: middle;
   }
 

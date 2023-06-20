@@ -62,4 +62,9 @@ input[type="checkbox"] {
 .other-diet-label {
   font-size: var(--type-sm) !important;
 }
+
+.dietary-options h3 {
+  line-height: 1;
+  margin: 10px 0;
+}
 </style>

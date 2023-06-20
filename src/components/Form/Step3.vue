@@ -59,7 +59,7 @@ const validateFormFields = () => {
 </script>
 
 <template>
-  <div>
+  <div class="step-3">
     <h3>Guest {{ props.currentGuestIndex + 1 }}</h3>
     <InputBox
         label="Name"
@@ -79,3 +79,16 @@ const validateFormFields = () => {
     </div>
   </div>
 </template>
+<style scoped>
+h3 {
+  line-height: 1;
+  margin: 0;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .step-3 {
+  font-size: 0.75em;
+  }
+}
+</style>

@@ -6,9 +6,10 @@ import Step2 from "@/components/Form/Step2.vue";
 import Step3 from "@/components/Form/Step3.vue";
 import FormButtons from "@/components/Form/FormButtons.vue";
 import CustomHR from "@/components/CustomHR.vue";
+import FormSuccess from "@/components/Form/FormSuccess.vue";
 
 // Define the number of maximum steps in the form
-const maxSteps = 3;
+const maxSteps = 4;
 
 // Reactive variables to store the current step and form data
 const currentStep = ref(1);
@@ -35,35 +36,33 @@ const formData = reactive({
 
 // Error Function Handling
 // Provide the error flag to all child components.
-provide('errorFlag', formData.errorFlag);
+const errorFlag = ref(formData.errorFlag);
 const errorHandler = (value) => {
   formData.errorFlag = value;
 };
+provide('errorFlag', errorFlag.value);
 
 
 // Reactive variable to store the current guest index
 const currentGuestIndex = ref(0)
 
-// Load the form data from cache when the component is mounted
-onBeforeMount(() => {
-  const savedData = loadFormData();
-  if (savedData) {
-    Object.assign(formData, savedData);
-  }
-});
-
-watch(formData, () => {
-  saveFormData(formData);
-}, { deep: true });
-
 // Function to go to the next step
 const nextStep = () => {
   if (formData.errorFlag === false) {
     if (currentStep.value === 1) {
-      currentStep.value++;
-    } else if (currentStep.value === 2) {
-      currentStep.value++
-    } else if (currentStep.value === 3) {
+      currentStep.value = 2;
+    }
+
+    else if (currentStep.value === 2 && formData.guests.length > 0) {
+      currentStep.value = 3;
+    }
+
+    else if (currentStep.value === 2 && formData.guests.length === 0) {
+      currentStep.value = 4;
+      currentGuestIndex.value = 0;
+    }
+
+    else if (currentStep.value === 3) {
       if (currentGuestIndex.value === formData.guestCount) {
         submitForm();
       } else {
@@ -76,12 +75,24 @@ const nextStep = () => {
 // Function to go to the previous step
 const previousStep = () => {
   if (currentStep.value === 2) {
-    currentStep.value--;
-  } else if (currentStep.value === 3) {
+    currentStep.value = 1;
+  }
+
+  else if (currentStep.value === 3) {
     if (currentGuestIndex.value === 0) {
-      currentStep.value--;
-    } else {
+      currentStep.value = 2;
+    }
+    else {
       currentGuestIndex.value--;
+    }
+  }
+
+  else if (currentStep.value === 4) {
+    if (formData.guests.length === 0) {
+      currentStep.value = 2;
+    }
+    else if (formData.guests.length > 0) {
+      currentStep.value--;
     }
   }
 };
@@ -89,6 +100,7 @@ const previousStep = () => {
 // Function to submit the form
 const submitForm = () => {
   if (formData.errorFlag === false) {
+    currentStep.value = 4;
     fetch('https://script.google.com/macros/s/AKfycbyLF83P5XTQx262Fxyn7MNrQF58qHRaRWGcQl0mBYDEfxv5fMpwTDAGvRQw-ITe-MdDdA/exec', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -107,10 +119,7 @@ const submitForm = () => {
   }
 };
 
-// Function to handle form data update from child components
-const handleFormDataUpdate = (updatedFormData) => {
-  Object.assign(formData, updatedFormData);
-};
+
 
 </script>
 
@@ -120,7 +129,7 @@ const handleFormDataUpdate = (updatedFormData) => {
     <h2 v-if="currentStep === 1">Step 1</h2>
     <h2 v-if="currentStep === 2">Step 2: Your Information</h2>
     <h2 v-if="currentStep === 3">Step 3: Additional Guests Information</h2>
-    <p class="validation-info">Required fields are marked with an asterisk *</p>
+    <p class="validation-info" v-if="currentStep < 3">Required fields are marked with an asterisk *</p>
 
     <CustomHR />
 
@@ -128,7 +137,6 @@ const handleFormDataUpdate = (updatedFormData) => {
       <Step1
           :formData="formData"
           @hasErrors="errorHandler"
-          @update="handleFormDataUpdate"
           @next="nextStep"
       />
     </div>
@@ -136,7 +144,6 @@ const handleFormDataUpdate = (updatedFormData) => {
       <Step2
           :formData="formData"
           @hasErrors="errorHandler"
-          @update="handleFormDataUpdate"
           @next="nextStep"
           @previous="previousStep" />
     </div>
@@ -145,9 +152,11 @@ const handleFormDataUpdate = (updatedFormData) => {
           :formData="formData"
           :currentGuestIndex="currentGuestIndex"
           @hasErrors="errorHandler"
-          @update="handleFormDataUpdate"
           @next="nextStep"
           @previous="previousStep" />
+    </div>
+    <div class="container" v-else-if="currentStep === 4">
+      <FormSuccess />
     </div>
 
     <FormButtons
@@ -155,6 +164,7 @@ const handleFormDataUpdate = (updatedFormData) => {
         :maxSteps="maxSteps"
         :currentGuestIndex="currentGuestIndex"
         :guests="formData.guests"
+        :formData="formData"
         @next="nextStep"
         @previous="previousStep"
         @submit="submitForm"
@@ -176,7 +186,7 @@ const handleFormDataUpdate = (updatedFormData) => {
   }
 
   .dome-spacer {
-    height: 200px;
+    height: 40vw;
     width: 100%;
   }
 
@@ -192,5 +202,19 @@ const handleFormDataUpdate = (updatedFormData) => {
 
   .container {
     margin-bottom: 30px;
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .rsvp-form {
+      border-radius: 1000px 1000px 0 0;
+      width: 30%;
+      font-size: 0.6em;
+      padding: var(--sp-m) var(--sp-xxl);
+    }
+
+    .dome-spacer {
+      height: 10vw;
+    }
   }
 </style>

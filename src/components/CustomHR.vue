@@ -38,8 +38,8 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 1200px)  {
   .divider {
-    padding: var(--sp-l);
-    margin: var(--sp-l);
+    padding: var(--sp-m);
+    margin: var(--sp-xs);
   }
 }
 </style>

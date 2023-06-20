@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="step-2">
     <InputBox
       label="Name"
       :value="formData.name"
@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import {inject, onMounted, ref, watch} from "vue";
 import { saveFormData } from "@/js/formUtils.js";
 import InputBox from "@/components/FormFields/InputBox.vue";
 import ErrorLabel from "@/components/FormFields/ErrorLabel.vue";
@@ -90,6 +90,10 @@ const formData = ref(props.formData);
 const guestCount = ref(props.formData.guestCount);
 const guestList = ref(props.formData.guests);
 const userDiet = ref(props.formData.dietaryOptions);
+
+onMounted(() => {
+  validateFormFields();
+})
 
 watch(formData, (newFormData) => {
   emits("update", newFormData);
@@ -146,22 +150,23 @@ const isValidEmail = (email) => {
   return email.includes("@");
 };
 
+const errorFlag = inject('errorFlag');
 const validateFormFields = () => {
+  let hasErrors = false;
+
   if (formData.value.name.length < 2) {
-    emits("hasErrors", true);
+    hasErrors = true;
   }
+
   if (!isValidEmail(formData.value.email)) {
-    emits("hasErrors", true);
+    hasErrors = true;
   }
+
   if (!isValidPhoneNumber(formData.value.phone)) {
-    emits("hasErrors", true);
-  } else if (
-    formData.value.name.length > 2 &&
-    isValidEmail(formData.value.email) &&
-    isValidPhoneNumber(formData.value.phone)
-  ) {
-    emits("hasErrors", false);
+    hasErrors = true;
   }
+
+  emits("hasErrors", hasErrors);
 };
 
 const updateFormData = (field, value) => {
@@ -181,11 +186,23 @@ const updateFormData = (field, value) => {
   font-size: var(--type-body);
 }
 
+.dietary-options h3 {
+  margin: 10px 0;
+  line-height: 1;
+}
+
 input[type="checkbox"] {
   width: 30px;
   height: 30px;
   vertical-align: middle;
   margin-top: -5px;
+}
+
+textarea {
+  height: 150px;
+  font-family: 'Libre Baskerville', sans-serif;
+  font-weight: normal;
+  font-size: var(--type-sm);
 }
 
 .guest-counter {
@@ -233,4 +250,12 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   -moz-appearance: textfield;
 }
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .step-2 {
+    font-size: 0.75em;
+  }
+}
+
 </style>
