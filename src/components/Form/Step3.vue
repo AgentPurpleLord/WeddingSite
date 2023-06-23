@@ -17,6 +17,7 @@ const currentGuest = computed(() => guests.value[props.currentGuestIndex]);
 const updateGuestName = (name) => {
   currentGuest.value.name = name;
   saveGuestData(); // Save the guest data after updating the name
+  validateFormFields();
 };
 
 watch(currentGuest, () => {
@@ -38,6 +39,7 @@ const saveGuestData = () => {
 
 onMounted(() => {
   loadGuestData(); // Load guest data when the component is mounted
+  validateFormFields();
 });
 
 const handleGuestUpdate = (updatedGuest) => {
@@ -49,12 +51,14 @@ const handleGuestUpdate = (updatedGuest) => {
 
 // Validation Logic
 const validateFormFields = () => {
+  let hasErrors = false;
+
   if (currentGuest.value.name.length < 2) {
-    emits('hasErrors', true);
-  } else {
-    emits('hasErrors', false);
+    hasErrors = true;
   }
-}
+
+  emits("hasErrors", hasErrors);
+};
 
 </script>
 

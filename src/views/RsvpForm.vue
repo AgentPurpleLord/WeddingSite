@@ -47,6 +47,7 @@ const currentGuestIndex = ref(0)
 
 // Function to go to the next step
 const nextStep = () => {
+  console.log(formData.guests.length);
   if (formData.errorFlag === false) {
     if (currentStep.value === 1) {
       currentStep.value = 2;
@@ -62,7 +63,7 @@ const nextStep = () => {
     }
 
     else if (currentStep.value === 3) {
-      if (currentGuestIndex.value === formData.guestCount) {
+      if (currentGuestIndex.value >= formData.guests.length) {
         submitForm();
       } else {
         currentGuestIndex.value++;
@@ -117,7 +118,6 @@ const submitForm = () => {
     console.log("Form validation errors exist, cannot proceed.");
   }
 };
-
 
 
 </script>

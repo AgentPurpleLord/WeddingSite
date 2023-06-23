@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import {inject, onMounted, ref, watch} from "vue";
+import { onMounted, ref, watch} from "vue";
 import { saveFormData } from "@/js/formUtils.js";
 import InputBox from "@/components/FormFields/InputBox.vue";
 import ErrorLabel from "@/components/FormFields/ErrorLabel.vue";
@@ -150,7 +150,6 @@ const isValidEmail = (email) => {
   return email.includes("@");
 };
 
-const errorFlag = inject('errorFlag');
 const validateFormFields = () => {
   let hasErrors = false;
 
