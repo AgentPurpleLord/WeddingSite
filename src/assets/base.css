@@ -66,6 +66,7 @@
   --type-h1: 2.9em;
   --htext: var(--Seasalt600);
   --atext: var(--Seasalt500);
+  color-scheme: light only;
 }
 
 .shadow-small { box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%); }

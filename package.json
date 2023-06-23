@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "node scripts/gh-pages-deploy.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,7 +17,6 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/test-utils": "^2.3.2",
-    "execa": "^7.1.1",
     "vite": "^4.3.5"
   }
 }
